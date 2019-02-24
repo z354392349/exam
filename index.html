@@ -37,6 +37,9 @@
         .hide {
             display: none;
         }
+        #start{
+            color: lightcoral;
+        }
     </style>
 </head>
 <body>
@@ -54,7 +57,7 @@
     <input type="text">
     <button onclick="showHide('simple')">show</button>
 </label>
-<p><span>标准答</span> <span id="normal" class="hide">1213</span></p>
+<p><span>标准答</span> <span id="start"></span> <span id="normal" class="hide">1213</span></p>
 <label>
     <textarea name="" cols="30" rows="10"></textarea>
     <button onclick="showHide('normal')">show</button>
@@ -64,21 +67,25 @@
 <script src="data/mks.js"></script>
 <script src="data/wlgl.js"></script>
 <script>
+    console.log(`马克思:${data.mks.length}\n网络经济与企业管理：${data.wlgl.length}\n`);
 
     function showHide(id) {
         let node = document.getElementById(id);
         let display = getComputedStyle(node).display;
-        display === 'none' ? node.style.display = 'block' :node.style.display = 'none';
+        display === 'none' ? node.style.display = 'block' : node.style.display = 'none';
     }
 
 
     // 更换题目
+    let title = document.getElementById('title'); //标题
+    let simple = document.getElementById('simple'); //简单记
+    let normal = document.getElementById('normal'); //标准答
+    let start = document.getElementById('start'); //标准答
+
     function setSubject(subjectDate) {
-        let title = document.getElementById('title'); //标题
+
         title.innerText = subjectDate.title;
-        let simple = document.getElementById('simple'); //简单记
         simple.innerText = subjectDate.simple;
-        let normal = document.getElementById('normal'); //标准答
         let docFragment = document.createDocumentFragment();
         for (let i = 0; i < subjectDate.normal.length; i++) {
             let node = document.createElement('p');
@@ -88,6 +95,12 @@
         }
         normal.innerHTML = "";
         normal.appendChild(docFragment);
+        let startText = '';
+        for (let i = 0; i < subjectDate.start; i++) {
+            startText+= '★';
+        }
+        start.innerText = startText ;
+
     }
 
 
@@ -97,7 +110,7 @@
 
     // 更改类型
     let changeType = document.getElementById('changeType');
-    changeType.onchange = function (v) {
+    changeType.onchange = function () {
         type = data[this.value];  // 默认类型
     };
 
