@@ -1,10 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        * {
+            font-size: 14px;
+        }
+
+        .simple input {
+            width: 500px;
+            height: 24px;
+            padding: 0 10px;
+        }
+
+        textarea {
+            width: 500px;
+            height: 300px;
+            resize: none;
+            padding: 10px;
+
+        }
+
+        label {
+            display: block;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        select {
+            width: 80px;
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
 </head>
 <body>
+<h3 id="title">标题</h3>
+<label>
+    <span>选择科目</span>
+    <select name="" id="changeType">
+        <option value="mks">马克思主义基本原理概论</option>
+        <option value="wlgl">网络经济与企业管理</option>
+    </select>
+</label>
+<p>简单记</p>
+<p id="simple" class="hide"></p>
+<label class="simple">
+    <input type="text">
+    <button onclick="showHide('simple')">show</button>
+</label>
+<p><span>标准答</span> <span id="normal" class="hide">1213</span></p>
+<label>
+    <textarea name="" cols="30" rows="10"></textarea>
+    <button onclick="showHide('normal')">show</button>
+</label>
+<button id="changeBtn">change</button>
+<script src="data/data.js"></script>
+<script src="data/mks.js"></script>
+<script src="data/wlgl.js"></script>
+<script>
 
+    function showHide(id) {
+        let node = document.getElementById(id);
+        let display = getComputedStyle(node).display;
+        display === 'none' ? node.style.display = 'block' :node.style.display = 'none';
+    }
+
+
+    // 更换题目
+    function setSubject(subjectDate) {
+        let title = document.getElementById('title'); //标题
+        title.innerText = subjectDate.title;
+        let simple = document.getElementById('simple'); //简单记
+        simple.innerText = subjectDate.simple;
+        let normal = document.getElementById('normal'); //标准答
+        let docFragment = document.createDocumentFragment();
+        for (let i = 0; i < subjectDate.normal.length; i++) {
+            let node = document.createElement('p');
+            let node_text = document.createTextNode(subjectDate.normal[i]);
+            node.appendChild(node_text);
+            docFragment.appendChild(node);
+        }
+        normal.innerHTML = "";
+        normal.appendChild(docFragment);
+    }
+
+
+    let type = data.mks;  // 默认类型
+    let subjectDateDefault = type[parseInt(Math.random() * type.length)]; // 默认题目
+    setSubject(subjectDateDefault); // 设置题目
+
+    // 更改类型
+    let changeType = document.getElementById('changeType');
+    changeType.onchange = function (v) {
+        type = data[this.value];  // 默认类型
+    };
+
+    // 更改题目
+    let changeBtn = document.querySelector('#changeBtn');
+    changeBtn.onclick = function () {
+        let subjectDate = parseInt(Math.random() * type.length); // 切换题目
+        setSubject(type[subjectDate]);
+        let hides = document.getElementsByClassName('hide');
+        for (let i = 0; i < hides.length; i++) {
+            hides[i].style.display = 'none'
+        }
+    }
+
+
+</script>
 </body>
 </html>
