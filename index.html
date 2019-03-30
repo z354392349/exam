@@ -86,7 +86,6 @@
     let start = document.getElementById('start'); //标准答
 
     function setSubject(subjectDate) {
-
         title.innerText = subjectDate.title;
         simple.innerText = subjectDate.simple;
         let docFragment = document.createDocumentFragment();
@@ -121,6 +120,7 @@
     let changeBtn = document.querySelector('#changeBtn');
     changeBtn.onclick = function () {
         let subjectDate = parseInt(Math.random() * type.length); // 切换题目
+        console.log(subjectDate);
         setSubject(type[subjectDate]);
         let hides = document.getElementsByClassName('hide');
         for (let i = 0; i < hides.length; i++) {
