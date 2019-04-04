@@ -120,7 +120,7 @@
     // 更改题目
     let changeBtn = document.querySelector('#changeBtn');
     changeBtn.onclick = function () {
-        let subjectDate = parseInt(Math.random() * 15); // 切换题目
+        let subjectDate = parseInt(Math.random() * type.length); // 切换题目
         console.log(subjectDate);
         setSubject(type[subjectDate]);
         let hides = document.getElementsByClassName('hide');
