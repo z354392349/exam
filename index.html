@@ -37,7 +37,8 @@
         .hide {
             display: none;
         }
-        #start{
+
+        #start {
             color: lightcoral;
         }
     </style>
@@ -46,7 +47,7 @@
 <h3 id="title">标题</h3>
 <label>
     <span>选择科目</span>
-    <select name=""  id="changeType">
+    <select name="" id="changeType">
         <option value="mks">马克思主义基本原理概论</option>
         <option value="wlgl">网络经济与企业管理</option>
         <option value="czxt">操作系统</option>
@@ -100,9 +101,9 @@
         normal.appendChild(docFragment);
         let startText = '';
         for (let i = 0; i < subjectDate.start; i++) {
-            startText+= '★';
+            startText += '★';
         }
-        start.innerText = startText ;
+        start.innerText = startText;
 
     }
 
@@ -117,10 +118,15 @@
         type = data[this.value];  // 默认类型
     };
 
+
     // 更改题目
+    let set = new Set();
+    let i = 0;
     let changeBtn = document.querySelector('#changeBtn');
     changeBtn.onclick = function () {
-        let subjectDate = parseInt(Math.random() * type.length); // 切换题目
+        console.log(set,i++);
+        let subjectDate = parseInt(Math.random() * 15); // 切换题目
+        set.add(subjectDate);
         console.log(subjectDate);
         setSubject(type[subjectDate]);
         let hides = document.getElementsByClassName('hide');
