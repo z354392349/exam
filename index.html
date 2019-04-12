@@ -126,7 +126,10 @@
     changeBtn.onclick = function () {
         console.log(set,i++);
         //Math.random()*(maxNum-minNum+1)+minNum
-        let subjectDate = parseInt(Math.random()*(40-20+1)+20); // 切换题目
+        let maxNum =40;
+        let minNum =20;
+
+        let subjectDate = parseInt(Math.random()*(maxNum-minNum+1)+minNum); // 切换题目
         set.add(subjectDate);
         console.log(subjectDate);
         setSubject(type[subjectDate]);
