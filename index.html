@@ -125,7 +125,8 @@
     let changeBtn = document.querySelector('#changeBtn');
     changeBtn.onclick = function () {
         console.log(set,i++);
-        let subjectDate = parseInt(Math.random() * type.length); // 切换题目
+        //Math.random()*(maxNum-minNum+1)+minNum
+        let subjectDate = parseInt(Math.random()*(40-20+1)+20); // 切换题目
         set.add(subjectDate);
         console.log(subjectDate);
         setSubject(type[subjectDate]);
