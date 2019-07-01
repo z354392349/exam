@@ -24,7 +24,13 @@
         }
 
         label {
-            display: block;
+            display: inline-block;
+            padding-right: 20px;
+        }
+
+        label .span,
+        label .select {
+            vertical-align: middle;
         }
 
         button {
@@ -48,13 +54,19 @@
 <body>
     <h3 id="title">标题</h3>
     <label>
-        <span>选择科目</span>
+        <span>选择科目:</span>
         <select name="" id="changeType">
+            <option value="wlgl" data-number="12">网络经济与企业管理</option>
             <option value="mks">马克思主义基本原理概论</option>
-            <option value="wlgl">网络经济与企业管理</option>
             <option value="czxt">操作系统</option>
         </select>
+
     </label>
+    <labe>
+        <span>选择章节:</span>
+        <select name="" id="changeChapter">
+        </select>
+    </labe>
     <p>简单记</p>
     <p id="simple" class="hide"></p>
     <label class="simple">
@@ -76,6 +88,10 @@
         console.log(`网络经济与企业管理：${data.wlgl.length}\n`);
         console.log(`操作系统概论：${data.czxt.length}\n`);
 
+        let changeType = document.getElementById('changeType'); //选择科目
+        let changeChapter = document.getElementById('changeChapter'); //选择科目
+
+        // 隐藏和显示 答案
         function showHide(id) {
             let node = document.getElementById(id);
             let display = getComputedStyle(node).display;
@@ -110,36 +126,110 @@
         }
 
 
-        let type = data.mks; // 默认类型
-        let subjectDateDefault = type[parseInt(Math.random() * type.length)]; // 默认题目
-        setSubject(subjectDateDefault); // 设置题目
+        let type = data.wlgl; // 默认类型
+
+        // 默认第一章
+        let chapter;
+
+        function setChapter(number) {
+            number = parseInt(number);
+            switch (number) {
+                case 1:
+                    number = '第一章';
+                    break;
+                case 2:
+                    number = '第二章';
+                    break;
+                case 3:
+                    number = '第三章';
+                    break;
+                case 4:
+                    number = '第四章';
+                    break;
+                case 5:
+                    number = '第五章';
+                    break;
+                case 6:
+                    number = '第六章';
+                    break;
+                case 7:
+                    number = '第七章';
+                    break;
+                case 8:
+                    number = '第八章';
+                    break;
+                case 9:
+                    number = '第九章';
+                    break;
+                case 10:
+                    number = '第十章';
+                    break;
+                case 11:
+                    number = '第十一章';
+                    break;
+                case 12:
+                    number = '第十二章';
+                    break;
+
+                default:
+                    break;
+            }
+            chapter = [];
+            type.forEach(i => {
+                if (i.title.indexOf(number) !== -1) {
+                    chapter.push(i);
+                }
+            });
+            if (chapter === 0) {
+                chapter === type;
+                console.log('不支持选择章节');
+            }
+            console.log(chapter);
+        }
+
+        // 设置应该有多少个章节
+        function setChapterOption() {
+            // 设置一共有多少章节
+            changeChapter.innerHTML = "";
+            var index = changeType.selectedIndex;
+            let optionEl;
+            for (let i = 1; i <= changeType.options[index].dataset.number; i++) {
+                optionEl = document.createElement('option')
+                optionEl.innerHTML = `第${i}章`;
+                optionEl.value = i;
+                changeChapter.append(optionEl);
+            }
+        }
 
         // 更改类型
-        let changeType = document.getElementById('changeType');
         changeType.onchange = function () {
             type = data[this.value]; // 默认类型
+            setChapterOption();
         };
+        // 章节切换
+        changeChapter.onchange = function () {
+            console.log(this.value)
+            setChapter(this.value);
+        }
 
-
-        // 更改题目
-        let set = new Set();
         let i = 0;
         let changeBtn = document.querySelector('#changeBtn');
         changeBtn.onclick = function () {
-            console.log(set, i++);
             //Math.random()*(maxNum-minNum+1)+minNum
-            let maxNum = 0;
-            let minNum = 10;
-
+            // 题目范围
+            let maxNum = chapter.length - 1;
+            let minNum = 0;
             let subjectDate = parseInt(Math.random() * (maxNum - minNum + 1) + minNum); // 切换题目
-            set.add(subjectDate);
-            console.log(subjectDate);
-            setSubject(type[subjectDate]);
+            setSubject(chapter[subjectDate]);
             let hides = document.getElementsByClassName('hide');
             for (let i = 0; i < hides.length; i++) {
                 hides[i].style.display = 'none'
             }
         }
+
+        setChapterOption(); // 设置一共有多少章节
+        setChapter('1'); // 默认第一章节
+        setSubject(chapter[0]); // 设置题目
     </script>
 </body>
 
