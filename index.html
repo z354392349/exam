@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -43,103 +44,103 @@
         }
     </style>
 </head>
+
 <body>
-<h3 id="title">标题</h3>
-<label>
-    <span>选择科目</span>
-    <select name="" id="changeType">
-        <option value="mks">马克思主义基本原理概论</option>
-        <option value="wlgl">网络经济与企业管理</option>
-        <option value="czxt">操作系统</option>
-    </select>
-</label>
-<p>简单记</p>
-<p id="simple" class="hide"></p>
-<label class="simple">
-    <input type="text">
-    <button onclick="showHide('simple')">show</button>
-</label>
-<p><span>标准答</span> <span id="start"></span> <span id="normal" class="hide">1213</span></p>
-<label>
-    <textarea name="" cols="30" rows="10"></textarea>
-    <button onclick="showHide('normal')">show</button>
-</label>
-<button id="changeBtn">change</button>
-<script src="data/data.js"></script>
-<script src="data/mks.js"></script>
-<script src="data/wlgl.js"></script>
-<script src="data/czxt.js"></script>
-<script>
-    console.log(`马克思:${data.mks.length}\n`);
-    console.log(`网络经济与企业管理：${data.wlgl.length}\n`);
-    console.log(`操作系统概论：${data.czxt.length}\n`);
+    <h3 id="title">标题</h3>
+    <label>
+        <span>选择科目</span>
+        <select name="" id="changeType">
+            <option value="mks">马克思主义基本原理概论</option>
+            <option value="wlgl">网络经济与企业管理</option>
+            <option value="czxt">操作系统</option>
+        </select>
+    </label>
+    <p>简单记</p>
+    <p id="simple" class="hide"></p>
+    <label class="simple">
+        <input type="text">
+        <button onclick="showHide('simple')">show</button>
+    </label>
+    <p><span>标准答</span> <span id="start"></span> <span id="normal" class="hide">1213</span></p>
+    <label>
+        <textarea name="" cols="30" rows="10"></textarea>
+        <button onclick="showHide('normal')">show</button>
+    </label>
+    <button id="changeBtn">change</button>
+    <script src="data/data.js"></script>
+    <script src="data/mks.js"></script>
+    <script src="data/wlgl.js"></script>
+    <script src="data/czxt.js"></script>
+    <script>
+        console.log(`马克思:${data.mks.length}\n`);
+        console.log(`网络经济与企业管理：${data.wlgl.length}\n`);
+        console.log(`操作系统概论：${data.czxt.length}\n`);
 
-    function showHide(id) {
-        let node = document.getElementById(id);
-        let display = getComputedStyle(node).display;
-        display === 'none' ? node.style.display = 'block' : node.style.display = 'none';
-    }
-
-
-    // 更换题目
-    let title = document.getElementById('title'); //标题
-    let simple = document.getElementById('simple'); //简单记
-    let normal = document.getElementById('normal'); //标准答
-    let start = document.getElementById('start'); //标准答
-
-    function setSubject(subjectDate) {
-        title.innerText = subjectDate.title;
-        simple.innerText = subjectDate.simple;
-        let docFragment = document.createDocumentFragment();
-        for (let i = 0; i < subjectDate.normal.length; i++) {
-            let node = document.createElement('p');
-            let node_text = document.createTextNode(subjectDate.normal[i]);
-            node.appendChild(node_text);
-            docFragment.appendChild(node);
+        function showHide(id) {
+            let node = document.getElementById(id);
+            let display = getComputedStyle(node).display;
+            display === 'none' ? node.style.display = 'block' : node.style.display = 'none';
         }
-        normal.innerHTML = "";
-        normal.appendChild(docFragment);
-        let startText = '';
-        for (let i = 0; i < subjectDate.start; i++) {
-            startText += '★';
+
+
+        // 更换题目
+        let title = document.getElementById('title'); //标题
+        let simple = document.getElementById('simple'); //简单记
+        let normal = document.getElementById('normal'); //标准答
+        let start = document.getElementById('start'); //标准答
+
+        function setSubject(subjectDate) {
+            title.innerText = subjectDate.title;
+            simple.innerText = subjectDate.simple;
+            let docFragment = document.createDocumentFragment();
+            for (let i = 0; i < subjectDate.normal.length; i++) {
+                let node = document.createElement('p');
+                let node_text = document.createTextNode(subjectDate.normal[i]);
+                node.appendChild(node_text);
+                docFragment.appendChild(node);
+            }
+            normal.innerHTML = "";
+            normal.appendChild(docFragment);
+            let startText = '';
+            for (let i = 0; i < subjectDate.start; i++) {
+                startText += '★';
+            }
+            start.innerText = startText;
+
         }
-        start.innerText = startText;
-
-    }
 
 
-    let type = data.mks;  // 默认类型
-    let subjectDateDefault = type[parseInt(Math.random() * type.length)]; // 默认题目
-    setSubject(subjectDateDefault); // 设置题目
+        let type = data.mks; // 默认类型
+        let subjectDateDefault = type[parseInt(Math.random() * type.length)]; // 默认题目
+        setSubject(subjectDateDefault); // 设置题目
 
-    // 更改类型
-    let changeType = document.getElementById('changeType');
-    changeType.onchange = function () {
-        type = data[this.value];  // 默认类型
-    };
+        // 更改类型
+        let changeType = document.getElementById('changeType');
+        changeType.onchange = function () {
+            type = data[this.value]; // 默认类型
+        };
 
 
-    // 更改题目
-    let set = new Set();
-    let i = 0;
-    let changeBtn = document.querySelector('#changeBtn');
-    changeBtn.onclick = function () {
-        console.log(set,i++);
-        //Math.random()*(maxNum-minNum+1)+minNum
-        let maxNum =40;
-        let minNum =20;
+        // 更改题目
+        let set = new Set();
+        let i = 0;
+        let changeBtn = document.querySelector('#changeBtn');
+        changeBtn.onclick = function () {
+            console.log(set, i++);
+            //Math.random()*(maxNum-minNum+1)+minNum
+            let maxNum = 0;
+            let minNum = 10;
 
-        let subjectDate = parseInt(Math.random()*(maxNum-minNum+1)+minNum); // 切换题目
-        set.add(subjectDate);
-        console.log(subjectDate);
-        setSubject(type[subjectDate]);
-        let hides = document.getElementsByClassName('hide');
-        for (let i = 0; i < hides.length; i++) {
-            hides[i].style.display = 'none'
+            let subjectDate = parseInt(Math.random() * (maxNum - minNum + 1) + minNum); // 切换题目
+            set.add(subjectDate);
+            console.log(subjectDate);
+            setSubject(type[subjectDate]);
+            let hides = document.getElementsByClassName('hide');
+            for (let i = 0; i < hides.length; i++) {
+                hides[i].style.display = 'none'
+            }
         }
-    }
-
-
-</script>
+    </script>
 </body>
+
 </html>
