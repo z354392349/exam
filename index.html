@@ -60,9 +60,10 @@
     <label>
         <span>选择科目:</span>
         <select name="" id="changeType">
-            <option value="wlgl" data-number="12">网络经济与企业管理</option>
+            <option value="wlgl" data-number="11">网络经济与企业管理</option>
             <option value="mks">马克思主义基本原理概论</option>
             <option value="czxt">操作系统</option>
+            <option value="jds" data-number="1">中国近现代史纲要</option>
         </select>
 
     </label>
@@ -87,6 +88,7 @@
     <script src="data/mks.js"></script>
     <script src="data/wlgl.js"></script>
     <script src="data/czxt.js"></script>
+    <script src="data/jds.js"></script>
     <script>
         console.log(`马克思:${data.mks.length}\n`);
         console.log(`网络经济与企业管理：${data.wlgl.length}\n`);
@@ -132,7 +134,7 @@
 
         let type = data.wlgl; // 默认类型
 
-        // 默认第一章
+        // 整理章节数据方法  默认第一章
         let chapter;
 
         function setChapter(number) {
@@ -196,6 +198,7 @@
             // 设置一共有多少章节
             changeChapter.innerHTML = "";
             var index = changeType.selectedIndex;
+            console.log(changeType.options[0].dataset);
             let optionEl;
             for (let i = 1; i <= changeType.options[index].dataset.number; i++) {
                 optionEl = document.createElement('option')
@@ -205,11 +208,15 @@
             }
         }
 
-        // 更改类型 
+        // 科目切换 
         changeType.onchange = function () {
-            type = data[this.value]; // 默认类型
-            setChapterOption();
+            type = data[this.value]; // 切换的科目
+            console.log(type, 'type');
+            setChapterOption(); // 设置option 有多少章节可以选择
+            setChapter('1'); // 默认第一章节
+            changeBtn.click(); // 随机切换题目
         };
+
         // 章节切换
         changeChapter.onchange = function () {
             console.log(this.value)
