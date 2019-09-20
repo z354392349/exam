@@ -93,6 +93,7 @@
         console.log(`马克思:${data.mks.length}\n`);
         console.log(`网络经济与企业管理：${data.wlgl.length}\n`);
         console.log(`操作系统概论：${data.czxt.length}\n`);
+        console.log(`近代史：${data.jds.length}\n`);
 
         let changeType = document.getElementById('changeType'); //选择科目
         let changeChapter = document.getElementById('changeChapter'); //选择科目
@@ -198,7 +199,6 @@
             // 设置一共有多少章节
             changeChapter.innerHTML = "";
             var index = changeType.selectedIndex;
-            console.log(changeType.options[0].dataset);
             let optionEl;
             for (let i = 1; i <= changeType.options[index].dataset.number; i++) {
                 optionEl = document.createElement('option')
