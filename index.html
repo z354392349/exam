@@ -67,11 +67,17 @@
         </select>
 
     </label>
-    <labe>
+    <label id="changeChapterBox">
         <span>选择章节:</span>
         <select name="" id="changeChapter">
         </select>
-    </labe>
+    </label>
+    <label id="rangeBox">
+        开始：<input type="text" id="begin">
+
+        结束：<input type="text" id="end">
+    </label>
+
     <p>简单记</p>
     <p id="simple" class="hide"></p>
     <label class="simple">
@@ -96,7 +102,11 @@
         console.log(`近代史：${data.jds.length}\n`);
 
         let changeType = document.getElementById('changeType'); //选择科目
-        let changeChapter = document.getElementById('changeChapter'); //选择科目
+        let changeChapter = document.getElementById('changeChapter'); //选择章节
+        let changeChapterBox = document.getElementById('changeChapterBox'); //选择章节容器
+        let begin = document.getElementById('begin'); //没有章节的时候选择范围
+        let end = document.getElementById('end'); //没有章节的时候选择范围
+        let rangeBox = document.getElementById('rangeBox'); //范围容器
 
         // 隐藏和显示 答案
         function showHide(id) {
@@ -199,21 +209,32 @@
             // 设置一共有多少章节
             changeChapter.innerHTML = "";
             var index = changeType.selectedIndex;
+            var chapterNumner = changeType.options[index].dataset.number; // 有多少章节
+            console.log(chapterNumner, '试试')
+            if (!chapterNumner) { // 不存在章节
+                chapter = type; //拿出全部章节的数据
+                changeChapterBox.style.display = 'none';
+                rangeBox.style.display = 'inline-block';
+                begin.value = '';
+                end.value = '';
+                return;
+            }
+            changeChapterBox.style.display = 'inline-block';
+            rangeBox.style.display = 'none';
             let optionEl;
-            for (let i = 1; i <= changeType.options[index].dataset.number; i++) {
+            for (let i = 1; i <= chapterNumner; i++) {
                 optionEl = document.createElement('option')
                 optionEl.innerHTML = `第${i}章`;
                 optionEl.value = i;
                 changeChapter.append(optionEl);
             }
+            setChapter('1'); // 默认第一章节
         }
 
         // 科目切换 
         changeType.onchange = function () {
             type = data[this.value]; // 切换的科目
-            console.log(type, 'type');
             setChapterOption(); // 设置option 有多少章节可以选择
-            setChapter('1'); // 默认第一章节
             changeBtn.click(); // 随机切换题目
         };
 
@@ -225,12 +246,15 @@
 
         let i = 0;
         let changeBtn = document.querySelector('#changeBtn');
+
         changeBtn.onclick = function () {
             //Math.random()*(maxNum-minNum+1)+minNum
             // 题目范围
-            let maxNum = chapter.length - 1;
-            let minNum = 0;
+            let maxNum = end.value === '' ? chapter.length - 1 : end.value;
+            let minNum = begin.value === '' ? 0 : begin.value;;
             let subjectDate = parseInt(Math.random() * (maxNum - minNum + 1) + minNum); // 切换题目
+
+            console.log(maxNum, minNum, subjectDate)
             setSubject(chapter[subjectDate]);
             let hides = document.getElementsByClassName('hide');
             for (let i = 0; i < hides.length; i++) {
