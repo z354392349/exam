@@ -64,6 +64,7 @@
             <option value="mks">马克思主义基本原理概论</option>
             <option value="czxt">操作系统</option>
             <option value="jds" data-number="11">中国近现代史纲要</option>
+            <option value="sjk">数据库基本原理 </option>
         </select>
 
     </label>
@@ -95,11 +96,13 @@
     <script src="data/wlgl.js"></script>
     <script src="data/czxt.js"></script>
     <script src="data/jds.js"></script>
+    <script src="data/sjk.js"></script>
     <script>
         console.log(`马克思:${data.mks.length}\n`);
         console.log(`网络经济与企业管理：${data.wlgl.length}\n`);
         console.log(`操作系统概论：${data.czxt.length}\n`);
         console.log(`近代史：${data.jds.length}\n`);
+        console.log(`数据库：${data.sjk.length}\n`);
 
         let changeType = document.getElementById('changeType'); //选择科目
         let changeChapter = document.getElementById('changeChapter'); //选择章节
@@ -210,7 +213,6 @@
             changeChapter.innerHTML = "";
             var index = changeType.selectedIndex;
             var chapterNumner = changeType.options[index].dataset.number; // 有多少章节
-            console.log(chapterNumner, '试试')
             if (!chapterNumner) { // 不存在章节
                 chapter = type; //拿出全部章节的数据
                 changeChapterBox.style.display = 'none';
@@ -250,11 +252,11 @@
         changeBtn.onclick = function () {
             //Math.random()*(maxNum-minNum+1)+minNum
             // 题目范围
-            let maxNum = end.value === '' ? chapter.length - 1 : end.value;
-            let minNum = begin.value === '' ? 0 : begin.value;;
-            let subjectDate = parseInt(Math.random() * (maxNum - minNum + 1) + minNum); // 切换题目
+            let maxNum = end.value === '' ? chapter.length - 1 : end.value * 1;
+            let minNum = begin.value === '' ? 0 : begin.value * 1;
+            let subjectDate = parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10); // 切换题目
 
-            console.log(maxNum, minNum, subjectDate)
+            console.log(minNum, maxNum, subjectDate)
             setSubject(chapter[subjectDate]);
             let hides = document.getElementsByClassName('hide');
             for (let i = 0; i < hides.length; i++) {
