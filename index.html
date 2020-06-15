@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-·">
+<html lang="zh-CN">
 
 <head>
     <meta charset="UTF-8">
@@ -8,43 +8,42 @@
         * {
             font-size: 14px;
         }
-
+        
         .simple input {
             width: 500px;
             height: 24px;
             padding: 0 10px;
         }
-
+        
         textarea {
             width: 500px;
             height: 300px;
             resize: none;
             padding: 10px;
-
         }
-
+        
         label {
             display: inline-block;
             padding-right: 20px;
         }
-
+        
         label .span,
         label .select {
             vertical-align: middle;
         }
-
+        
         button {
             cursor: pointer;
         }
-
+        
         select {
             width: 200px;
         }
-
+        
         .hide {
             display: none;
         }
-
+        
         #start {
             color: lightcoral;
         }
@@ -232,14 +231,14 @@
         }
 
         // 科目切换 
-        changeType.onchange = function () {
+        changeType.onchange = function() {
             type = data[this.value]; // 切换的科目
             setChapterOption(); // 设置option 有多少章节可以选择
             changeBtn.click(); // 随机切换题目
         };
 
         // 章节切换
-        changeChapter.onchange = function () {
+        changeChapter.onchange = function() {
             console.log(this.value)
             setChapter(this.value);
         }
@@ -247,7 +246,7 @@
         let i = 0;
         let changeBtn = document.querySelector('#changeBtn');
 
-        changeBtn.onclick = function () {
+        changeBtn.onclick = function() {
             //Math.random()*(maxNum-minNum+1)+minNum
             // 题目范围
             let maxNum = end.value === '' ? chapter.length - 1 : end.value * 1;
