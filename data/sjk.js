@@ -1,4 +1,5 @@
 data.sjk = [{
+
     simple: "第一章",
     title: "请说明数据库的定义",
     normal: [
@@ -8,6 +9,7 @@ data.sjk = [{
     ],
     start: 1,
 },
+
 
 {
     title: "数据库管理系统提供哪些对数据的统一管理和控制功能? ",
