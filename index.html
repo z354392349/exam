@@ -8,42 +8,42 @@
         * {
             font-size: 14px;
         }
-        
+
         .simple input {
             width: 500px;
             height: 24px;
             padding: 0 10px;
         }
-        
+
         textarea {
             width: 500px;
             height: 300px;
             resize: none;
             padding: 10px;
         }
-        
+
         label {
             display: inline-block;
             padding-right: 20px;
         }
-        
+
         label .span,
         label .select {
             vertical-align: middle;
         }
-        
+
         button {
             cursor: pointer;
         }
-        
+
         select {
             width: 200px;
         }
-        
+
         .hide {
             display: none;
         }
-        
+
         #start {
             color: lightcoral;
         }
@@ -62,6 +62,7 @@
             <option value="czxt">操作系统</option>
             <option value="jds" data-number="11">中国近现代史纲要</option>
             <option value="sjk">数据库基本原理 </option>
+            <option value="xxxt">信息系统</option>
         </select>
 
     </label>
@@ -88,18 +89,22 @@
         <button onclick="showHide('normal')">show</button>
     </label>
     <button id="changeBtn">change</button>
+
     <script src="data/data.js"></script>
     <script src="data/mks.js"></script>
     <script src="data/wlgl.js"></script>
     <script src="data/czxt.js"></script>
     <script src="data/jds.js"></script>
     <script src="data/sjk.js"></script>
+    <script src="data/xxxt.js"></script>
+
     <script>
-        console.log(`马克思:${data.mks.length}\n`);
+        console.log(`马克思：${data.mks.length}\n`);
         console.log(`网络经济与企业管理：${data.wlgl.length}\n`);
         console.log(`操作系统概论：${data.czxt.length}\n`);
         console.log(`近代史：${data.jds.length}\n`);
         console.log(`数据库：${data.sjk.length}\n`);
+        console.log(`信息系统：${data.xxx.length}\n`);
 
         let changeType = document.getElementById('changeType'); //选择科目
         let changeChapter = document.getElementById('changeChapter'); //选择章节
@@ -231,14 +236,14 @@
         }
 
         // 科目切换 
-        changeType.onchange = function() {
+        changeType.onchange = function () {
             type = data[this.value]; // 切换的科目
             setChapterOption(); // 设置option 有多少章节可以选择
             changeBtn.click(); // 随机切换题目
         };
 
         // 章节切换
-        changeChapter.onchange = function() {
+        changeChapter.onchange = function () {
             console.log(this.value)
             setChapter(this.value);
         }
@@ -246,7 +251,7 @@
         let i = 0;
         let changeBtn = document.querySelector('#changeBtn');
         let set = new Set();
-        changeBtn.onclick = function() {
+        changeBtn.onclick = function () {
             //Math.random()*(maxNum-minNum+1)+minNum
             // 题目范围
             let maxNum = end.value === '' ? chapter.length - 1 : end.value * 1;
