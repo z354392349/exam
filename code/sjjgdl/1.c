@@ -22,6 +22,8 @@ int search(int a[], int k)
 // 写出方阵A[n][n]与B[n][n]的乘积C[n][n]，分析算法的时间复杂度, 时间复杂度为O(n^3)
 // 要计算乘积，a的行长度必须等于b的列长度
 // 思想，先循环行，在循环列，最后循环，乘积,乘积是一个横着走，一个竖着走的
+// 看不明白就拿出纸画一下就行了，其实就是第一层循环取出来行，第二层取出来列
+// 第三个循环层 计算当前循环的乘积
 
 void matri(int n, int a[][n], int b[n][n], int c[][n])
 {
@@ -296,6 +298,18 @@ void sort(int a[], int n)
 //         error("未找到第i个结点");
 //     }
 // }
+
+void sort(int a[], int n)
+{
+    int i, temp;
+    for (i = 0; i < n / 2; i++)
+    {
+        temp = a[i];
+        a[i] = a[n - i - 1];
+        a[n - i - 1] = temp;
+        /* code */
+    }
+}
 
 int main()
 {
