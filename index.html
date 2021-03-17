@@ -64,6 +64,7 @@
       <option value="sjk">数据库基本原理 </option>
       <option value="xxxt">信息系统</option>
       <option value="wlyl" data-number="11">网络原理</option>
+      <option value="ycx" data-number="11">运筹学</option>
     </select>
 
   </label>
@@ -98,6 +99,7 @@
   <script src="data/sjk.js"></script>
   <script src="data/xxxt.js"></script>
   <script src="data/wlyl.js"></script>
+  <script src="data/ycx.js"></script>
 
   <script>
     console.log(`马克思：${data.mks.length}\n`);
@@ -107,6 +109,7 @@
     console.log(`数据库：${data.sjk.length}\n`);
     console.log(`信息系统：${data.xxxt.length}\n`);
     console.log(`网络原理：${data.wlyl.length}\n`);
+    console.log(`运筹学${data.ycx.length}\n`);
 
     let changeType = document.getElementById('changeType'); //选择科目
     let changeChapter = document.getElementById('changeChapter'); //选择章节
@@ -245,14 +248,15 @@
     };
 
     // 章节切换
+    let set = new Set();
     changeChapter.onchange = function () {
       console.log(this.value)
+      set.clear();
       setChapter(this.value);
     }
 
     let i = 0;
     let changeBtn = document.querySelector('#changeBtn');
-    let set = new Set();
     changeBtn.onclick = function () {
       //Math.random()*(maxNum-minNum+1)+minNum
       // 题目范围
