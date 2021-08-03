@@ -67,18 +67,18 @@
   </div>
 
   <script src="./data/data.js"></script>
-  <script src="./data/kfgj.js"></script>
+  <script src="./data/ycx.js"></script>
 
   <script>
     var html = '';
 
-    let datas = data.kfgj;
+    let datas = data.ycx;
 
-    datas.forEach(data => {
+    datas.forEach(n => {
       html += `<div class="item">
-      <h3>${data.title}</h3>
-      <h4>${data.simple}</h4>
-      ${data.normal.map(x => { return `<p>${x} </p>` }).join('')}
+      <h3>${n.title}</h3>
+      <h4>${n.simple}</h4>
+      ${n.normal.map(x => { return `<p>${x} </p>` }).join('')}
     </div>`
     });
 
